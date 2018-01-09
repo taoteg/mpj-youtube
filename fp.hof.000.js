@@ -201,11 +201,16 @@ var output = fs.readFileSync('test-data.txt', 'utf8')
   .map(line => line.split('\t'))
   .reduce((customers, line) => {
     // console.log('line: ', line)
-    customers[line[0]] = []
+    customers[line[0]] = customers[line[0]] || []
+    customers[line[0]].push({
+      name: line[1],
+      price: line[2],
+      quantity: line[3]
+    })
     return customers
   }, {})
-console.log('\noutput:\n', output)
-
+// console.log('\noutput:\n', output)
+console.log('\noutput:\n', JSON.stringify(output, null, 4))   // Better output logging.
 
 
 
