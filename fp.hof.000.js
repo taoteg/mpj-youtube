@@ -1,5 +1,7 @@
 
 underscore = require('./node_modules/underscore/underscore-min.js')
+fs = require('fs')
+// import fs from 'fs'
 
 console.log('\nMPJ "Fun Fun Function" YouTube Series:')
 console.log(' + Functional Javascript')
@@ -159,3 +161,53 @@ console.log('\ntotalAmount: \n', totalAmount)
 // Arrow functions!
 var reduceTotalAmount = orders.reduce((sum, order) => sum + order.amount, 0)
 console.log('\nreduceTotalAmount: \n', reduceTotalAmount)
+
+
+// MOAR REDUCE METHOD.
+
+// We can use reduce for much more than reducing numbers.
+// Lets reduce an array and mutate an object.
+
+// GOAL: Transform plain text data into object literals.
+// user name, item name, item price, item qty
+
+// Raw Buffer data.
+// var output = fs.readFileSync('data.txt')
+// console.log('\noutput:\n', output)
+
+// UTF-8 data.
+// var output = fs.readFileSync('data.txt', 'utf8')
+// console.log('\noutput:\n', output)
+
+// Split up into elements.
+// var output = fs.readFileSync('data.txt', 'utf8').split('\n')
+// console.log('\noutput:\n', output)
+
+// Trim the lines.
+// var output = fs.readFileSync('data.txt', 'utf8').trim().split('\n')
+// console.log('\noutput:\n', output)
+
+// Map the lines to array objects.
+// var output = fs.readFileSync('data.txt', 'utf8')
+//   .trim()
+//   .split('\n')
+//   .map(line => line.split('\t'))
+// console.log('\noutput:\n', output)
+
+// Reduce the array objects.
+var output = fs.readFileSync('test-data.txt', 'utf8')
+  .trim()
+  .split('\n')
+  .map(line => line.split('\t'))
+  .reduce((customers, line) => {
+    // console.log('line: ', line)
+    customers[line[0]] = []
+    return customers
+  }, {})
+console.log('\noutput:\n', output)
+
+
+
+
+
+//
